@@ -1,17 +1,55 @@
 'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
     return (
-        <nav className="bg-gray-800 p-4 flex justify-between items-center shadow">
-            <Link href="/" className="text-xl font-bold text-yellow-400">
-                MovieApp
-            </Link>
-            <div className="space-x-4 text-gray-300">
-                <Link href="/search">Search</Link>
-                <Link href="/watchlist">Watchlist</Link>
-                <Link href="/ai-suggestions">AI Concierge</Link>
+        <header className="bg-blue w-full z-50 px-6 py-4 flex items-center justify-between shadow-sm border-b border-white/5">
+
+            {/* Left – Logo */}
+            <div className="text-red-600 text-2xl font-bold tracking-tight">
+                Project Nexus
             </div>
-        </nav>
+
+            {/* Center – Nav Links */}
+            <nav className="hidden md:flex items-center space-x-6">
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/movie">Movies</NavLink>
+                <NavLink href="/series">Series</NavLink>
+                <NavLink href="/trending">Trending</NavLink>
+                <NavLink href="/categories">Categories</NavLink>
+            </nav>
+
+            {/* Right – Search and Avatar */}
+            <div className="flex items-center gap-4">
+                <input
+                    type="text"
+                    placeholder="Search Movies, Series..."
+                    className="bg-white/10 backdrop-blur-md placeholder-gray-400 text-white text-sm px-4 py-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-red-600 w-[180px] md:w-[250px] transition duration-200"
+                />
+                <Image
+                    src="/next.svg"
+                    alt="User Avatar"
+                    width={36}
+                    height={36}
+                    className="rounded-full object-cover border border-white/20"
+                />
+            </div>
+        </header>
+    );
+}
+
+/**
+ * NavLink Component with hover animation
+ */
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+    return (
+        <Link
+            href={href}
+            className="text-white hover:text-red-500 transition-colors duration-200 text-sm font-medium"
+        >
+            {children}
+        </Link>
     );
 }

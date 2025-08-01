@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    @apply bg-gray-900 text-white;
+/* Smooth font rendering */
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Body Styling */
+body {
+    @apply bg-gray-900 text-white min-h-screen font-sans;
+}
+
+/* Remove outline only for mouse, not keyboard */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Scrollbar styling (optional) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Heading styles (optional override if not using Tailwind Typography plugin) */
+h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-white;
+}
+
+/* Link styling */
+a {
+    @apply text-white hover:text-red-500 transition-colors;
+}
+
+/* Input placeholders */
+::placeholder {
+    @apply text-gray-400;
 }

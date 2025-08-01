@@ -1,6 +1,7 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import React from 'react';
 
 export default function SmoothLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
