@@ -26,13 +26,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white min-h-screen flex flex-col scroll-smooth antialiased selection:bg-red-500/30 selection:text-white">
+        <body className=" text-white min-h-screen flex flex-col scroll-smooth antialiased selection:bg-red-500/30 selection:text-white">
         {/* Top Navigation */}
         <Navbar />
 
         {/* Main Animated Page Content */}
         <SmoothLayout>
-            <main className="flex-grow px-4 md:px-10 pt-24 pb-10">{children}</main>
+            <main className="flex-grow">{children}</main>
         </SmoothLayout>
 
         {/* Footer */}

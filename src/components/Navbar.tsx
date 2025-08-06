@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import React from 'react';
 
 export default function Navbar() {
     return (
-        <header className="bg-blue w-full z-50 px-6 py-4 flex items-center justify-between shadow-sm border-b border-white/5">
+        <header className="bg-white/20 backdrop-blur-md fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+
 
             {/* Left – Logo */}
             <div className="text-red-600 text-2xl font-bold tracking-tight">
@@ -16,9 +18,9 @@ export default function Navbar() {
             <nav className="hidden md:flex items-center space-x-6">
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/movie">Movies</NavLink>
-                <NavLink href="/series">Series</NavLink>
-                <NavLink href="/trending">Trending</NavLink>
-                <NavLink href="/categories">Categories</NavLink>
+                {/*<NavLink href="/series">Series</NavLink>*/}
+                {/*<NavLink href="/trending">Trending</NavLink>*/}
+                {/*<NavLink href="/categories">Categories</NavLink>*/}
             </nav>
 
             {/* Right – Search and Avatar */}
@@ -43,7 +45,7 @@ export default function Navbar() {
 /**
  * NavLink Component with hover animation
  */
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({href, children}: { href: string; children: React.ReactNode }) {
     return (
         <Link
             href={href}
