@@ -6,11 +6,11 @@ import React from 'react';
 
 export default function Navbar() {
     return (
-        <header className="bg-white/20 backdrop-blur-md fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-between">
+        <header className="bg-white/20 backdrop-blur-md fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-between rounded-lg">
 
 
             {/* Left – Logo */}
-            <div className="text-red-600 text-2xl font-bold tracking-tight">
+            <div className="text-blue-700 text-2xl font-bold tracking-tight">
                 Project Nexus
             </div>
 
@@ -18,9 +18,9 @@ export default function Navbar() {
             <nav className="hidden md:flex items-center space-x-6">
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/movie">Movies</NavLink>
-                {/*<NavLink href="/series">Series</NavLink>*/}
-                {/*<NavLink href="/trending">Trending</NavLink>*/}
-                {/*<NavLink href="/categories">Categories</NavLink>*/}
+                <NavLink href="/series">Series</NavLink>
+                <NavLink href="/trending">Trending</NavLink>
+                <NavLink href="/categories">Categories</NavLink>
             </nav>
 
             {/* Right – Search and Avatar */}
@@ -28,7 +28,7 @@ export default function Navbar() {
                 <input
                     type="text"
                     placeholder="Search Movies, Series..."
-                    className="bg-white/10 backdrop-blur-md placeholder-gray-400 text-white text-sm px-4 py-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-red-600 w-[180px] md:w-[250px] transition duration-200"
+                    className="bg-white/10 backdrop-blur-md placeholder-black text-black text-sm px-4 py-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-700 w-[180px] md:w-[250px] transition duration-200"
                 />
                 <Image
                     src="/next.svg"
@@ -49,7 +49,7 @@ function NavLink({href, children}: { href: string; children: React.ReactNode }) 
     return (
         <Link
             href={href}
-            className="text-white hover:text-red-500 transition-colors duration-200 text-sm font-medium"
+            className="text-white hover:text-blue-700 transition-colors duration-200 text-sm font-medium"
         >
             {children}
         </Link>
