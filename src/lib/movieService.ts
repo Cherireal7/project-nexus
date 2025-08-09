@@ -1,15 +1,10 @@
-// lib/movieService.ts
-
 export type Movie = {
     id: number;
     title: string;
     poster: string;
 };
 
-export interface FeaturedMovie {
-    id: number;
-    title: string;
-    poster: string;
+export interface FeaturedMovie extends Movie {
     description: string;
     duration: string;
     genre: string[];
@@ -32,12 +27,12 @@ const baseMovies: Movie[] = [
     {
         id: 3,
         title: 'Avatar',
-        poster: '/images/avatar.png',
+        poster: '/images/avatars.jpg',
     },
     {
         id: 4,
         title: 'Guardians of the Galaxy',
-        poster: '/images/guard.png',
+        poster: '/images/guards.jpg',
     },
     {
         id: 5,
@@ -62,7 +57,7 @@ function duplicateMovies(categoryIndex: number, repeats = 3): Movie[] {
     return duplicated;
 }
 
-// Exported functions for different sections
+// Movie list for each category
 export async function getTrendingMovies(): Promise<Movie[]> {
     return duplicateMovies(0);
 }
@@ -83,26 +78,92 @@ export async function getComedyMovies(): Promise<Movie[]> {
     return duplicateMovies(4);
 }
 
+// Featured Movies (full details)
+const featuredMovies: FeaturedMovie[] = [
+    {
+        id: 101,
+        title: 'Spider-Man: No Way Home',
+        poster: '/images/cover.png',
+        description: 'When a spell goes wrong, dangerous foes from other worlds start to appear...',
+        duration: '2h 28m',
+        genre: ['Action', 'Adventure'],
+        certification: 'CBFC:U/A',
+        logo: '/images/Spiderman.png',
+    },
+    {
+        id: 102,
+        title: 'Guardians of the Galaxy',
+        poster: '/images/guards.jpg',
+        description: 'A group of intergalactic criminals must pull together...',
+        duration: '2h 10m',
+        genre: ['Sci-Fi', 'Adventure'],
+        certification: 'PG-13',
+        logo: '/images/guardians-logo.png',
+    },
+    {
+        id: 103,
+        title: 'Avatar',
+        poster: '/images/avatars.jpg',
+        description: 'On the lush alien world of Pandora live the Na’vi...',
+        duration: '2h 42m',
+        genre: ['Sci-Fi', 'Fantasy'],
+        certification: 'PG-13',
+        logo: '/images/avatar-logo.png',
+    },
+];
 
+export async function getFeaturedMovies(): Promise<FeaturedMovie[]> {
+    return featuredMovies;
+}
 
-export async function getFeaturedMovies(): Promise<Movie[]> {
+// 🔥 Unified movie fetcher — handles ALL movie types and enriches base movies
+export async function getMovieById(id: number): Promise<FeaturedMovie | null> {
+    const fallback: Omit<FeaturedMovie, keyof Movie> = {
+        description: 'No description available.',
+        duration: '1h 30m',
+        genre: ['Unknown'],
+        certification: 'Not Rated',
+        logo: '',
+    };
+
+    // 1. Try featured
+    const featured = featuredMovies.find(movie => movie.id === id);
+    if (featured) return featured;
+
+    // 2. Try base/duplicate categories
+    const allBase: Movie[] = [
+        ...duplicateMovies(0),
+        ...duplicateMovies(1),
+        ...duplicateMovies(2),
+        ...duplicateMovies(3),
+        ...duplicateMovies(4),
+    ];
+
+    const base = allBase.find(movie => movie.id === id);
+    if (!base) return null;
+
+    // 3. Enrich and return as FeaturedMovie
+    return { ...base, ...fallback };
+}
+
+export async function getSeries(): Promise<Movie[]> {
     return [
         {
-            id: 101,
-            title: 'Spider-Man: No Way Home',
-            poster: '/images/cover.png',
-        },
-        {
-            id: 102,
-            title: 'Guardians of the Galaxy',
+            id: 201,
+            title: 'The Witcher',
             poster: '/images/guards.jpg',
         },
         {
-            id: 103,
-            title: 'Avatar',
+            id: 202,
+            title: 'Stranger Things',
+            poster: '/images/wed.jpg',
+        },
+        {
+            id: 203,
+            title: 'Breaking Bad',
             poster: '/images/avatars.jpg',
         },
+        // Add more
     ];
 }
-
 

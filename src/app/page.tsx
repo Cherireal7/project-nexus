@@ -1,52 +1,46 @@
-'use client';
-
 import Image from 'next/image';
 import MovieCard from '@/components/MovieCard';
+import Link from 'next/link';
 import {
-    getTrendingMovies,
-    getTopSearches,
     getActionMovies,
-    getRomanceMovies,
     getComedyMovies,
-    getFeaturedMovies
+    getFeaturedMovies,
+    getRomanceMovies,
+    getTopSearches,
+    getTrendingMovies
 } from '@/lib/movieService';
-import { useEffect, useState } from 'react';
-import type { Movie } from '@/lib/movieService';
+import {getPopularMovies} from "@/lib/api";
+import {TMDBMovie} from "@/types/movie";
 
-export default function Home() {
-    const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
-    const [topSearches, setTopSearches] = useState<Movie[]>([]);
-    const [actionMovies, setActionMovies] = useState<Movie[]>([]);
-    const [romanceMovies, setRomanceMovies] = useState<Movie[]>([]);
-    const [comedyMovies, setComedyMovies] = useState<Movie[]>([]);
-    const [featuredMovies, setFeaturedMovies] = useState<Movie[]>([]);
-    const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
+export default async function Home() {
+    const [
+        trendingMovies,
+        topSearches,
+        actionMovies,
+        romanceMovies,
+        comedyMovies,
+        featuredMovies,
+    ] = await Promise.all([
+        getTrendingMovies(),
+        getTopSearches(),
+        getActionMovies(),
+        getRomanceMovies(),
+        getComedyMovies(),
+        getFeaturedMovies(),
+    ]);
 
-    useEffect(() => {
-        getTrendingMovies().then(setTrendingMovies);
-        getTopSearches().then(setTopSearches);
-        getActionMovies().then(setActionMovies);
-        getRomanceMovies().then(setRomanceMovies);
-        getComedyMovies().then(setComedyMovies);
-        getFeaturedMovies().then(setFeaturedMovies);
-    }, []);
+    const response = await getPopularMovies();
+    const popularMovies:TMDBMovie[] = response.results
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentFeaturedIndex((prev) => (prev + 1) % featuredMovies.length);
-        }, 10000);
 
-        return () => clearInterval(interval);
-    }, [featuredMovies]);
-
-    const featured = featuredMovies[currentFeaturedIndex];
+    const featured = featuredMovies[0]; // Pick the first featured movie
 
     const sections = [
-        { title: 'Latest & Trending', data: trendingMovies, showNumbers: true },
-        { title: 'Top Searches', data: topSearches },
-        { title: 'Action', data: actionMovies },
-        { title: 'Romance & Drama', data: romanceMovies },
-        { title: 'Comedy', data: comedyMovies }
+        { title: 'Latest & Trending', data: popularMovies, showNumbers: true },
+        // { title: 'Top Searches', data: topSearches },
+        // { title: 'Action', data: actionMovies },
+        // { title: 'Romance & Drama', data: romanceMovies },
+        // { title: 'Comedy', data: comedyMovies },
     ];
 
     return (
@@ -77,14 +71,24 @@ export default function Home() {
             {sections.map((section, index) => (
                 <section key={index} className="pt-10 bg-black">
                     <div className="flex justify-between items-center px-4 md:px-10 mb-4">
-                        <h2 className="text-xl md:text-2xl font-semibold">{section.title}</h2>
-                        <button className="text-sm text-gray-400 hover:text-white transition">View More →</button>
+                        <h2 className="text-xl md:text-2xl font-semibold text-white">
+                            {section.title}
+                        </h2>
+                        <button className="text-sm text-gray-400 hover:text-white transition">
+                            View More →
+                        </button>
                     </div>
 
                     <div className="overflow-x-auto scrollbar-hide">
                         <div className="flex gap-8 px-4 md:px-10 pb-6">
                             {section.data.map((movie) => (
-                                <MovieCard key={movie.id} movie={movie} showNumber={section.showNumbers} />
+                                <Link
+                                    href={`/movie/${movie.id}`}
+                                    key={movie.id}
+                                    className="min-w-[140px] md:min-w-[180px]"
+                                >
+                                    <MovieCard movie={movie} showNumber={section.showNumbers} />
+                                </Link>
                             ))}
                         </div>
                     </div>

@@ -1,14 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import { Movie } from '@/lib/movieService';
+import {TMDBMovie} from "@/types/movie";
 
 interface MovieCardProps {
-    movie: Movie;
+    movie: TMDBMovie;
     showNumber?: boolean;
 }
 
 export default function MovieCard({ movie, showNumber = false }: MovieCardProps) {
+    const imgBaseURL = process.env.NEXT_PUBLIC_IMG_URL + (movie.poster_path ?? '');
     return (
         <div className="relative min-w-[140px] md:min-w-[180px]">
             {showNumber && (
@@ -17,14 +18,15 @@ export default function MovieCard({ movie, showNumber = false }: MovieCardProps)
                 </div>
             )}
 
-            <div className="relative z-10 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300">
+            <div className="relative z-10 w-[140px] h-[210px] md:w-[180px] md:h-[270px] rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300">
                 <Image
-                    src={movie.poster}
+                    src={imgBaseURL}
                     alt={movie.title}
-                    width={180}
-                    height={270}
-                    className="object-cover rounded-2xl"
+                    fill
+                    sizes="(min-width: 768px) 180px, 140px"
+                    className="object-cover"
                 />
+
             </div>
         </div>
     );
