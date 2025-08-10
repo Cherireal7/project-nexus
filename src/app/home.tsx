@@ -115,7 +115,7 @@ export default function Home({movies, shows, mood}: {movies: Movie[], shows: TVS
 
                 {movies.length === 0 ? (
                     <p className="px-4 md:px-10 text-white/50 animate-in fade-in duration-300">
-                        No results. Try a different mood or keyword.
+                        Oops mate, No results. Try a different mood or keyword please :)
                     </p>
                 ) : (
                     <div className="overflow-x-auto scrollbar-hide">
@@ -145,7 +145,7 @@ export default function Home({movies, shows, mood}: {movies: Movie[], shows: TVS
 
                 {shows.length === 0 ? (
                     <p className="px-4 md:px-10 text-white/50 animate-in fade-in duration-300">
-                        No results. Try a different mood or keyword.
+                        Oops mate, No results. Try a different mood or keyword please :)
                     </p>
                 ) : (
                     <div className="overflow-x-auto scrollbar-hide">
