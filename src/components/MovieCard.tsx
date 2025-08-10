@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import {TMDBMovie} from "@/types/movie";
+import {TVShow} from "@/lib/moviesbymood";
 
 interface MovieCardProps {
-    movie: TMDBMovie;
+    movie: TMDBMovie | TVShow;
     showNumber?: boolean;
 }
 
@@ -21,7 +22,7 @@ export default function MovieCard({ movie, showNumber = false }: MovieCardProps)
             <div className="relative z-10 w-[140px] h-[210px] md:w-[180px] md:h-[270px] rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300">
                 <Image
                     src={imgBaseURL}
-                    alt={movie.title}
+                    alt={"title" in movie ? movie.title?.toString() : movie.name}
                     fill
                     sizes="(min-width: 768px) 180px, 140px"
                     className="object-cover"

@@ -2,13 +2,13 @@ import '@/styles/globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SmoothLayout from '@/components/SmoothLayout';
-import type { Metadata, Viewport } from 'next';
+import type {Metadata, Viewport} from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
     title: 'Project Nexus – Movie Recommendations',
     description:
-        'Discover personalized movie and series suggestions with AI-powered recommendations.',
+        'Discover personalized movie and series suggestions based on your moods.',
     icons: {
         icon: '/favicon.ico',
     },

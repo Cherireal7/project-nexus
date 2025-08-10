@@ -3,12 +3,8 @@ import {getMovie} from "@/lib/api";
 import {TMDBMovieDetails} from "@/types/movie";
 import * as process from "node:process";
 
-interface MovieDetailPageProps {
-    params: { id: string };
-}
-
-export default async function MovieDetailPage({ params }: MovieDetailPageProps) {
-    const { id } = params;
+export default async function MovieDetailPage({params}: { params: Promise<{ id: string }> }) {
+    const {id} = await params;
     const movie: TMDBMovieDetails =  await getMovie(Number(id))
     const backdropImg = process.env.NEXT_PUBLIC_IMG_URL + (movie.backdrop_path ?? '');
     const poster = process.env.NEXT_PUBLIC_IMG_URL + (movie.poster_path ?? '');
