@@ -35,7 +35,7 @@ export default function Home({movies, shows, mood}: {movies: Movie[], shows: TVS
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/90" />
 
                 {/* Glass panel */}
-                <div className="relative z-10 h-full flex items-center justify-center px-4">
+                <div className="relative z-10 h-full flex items-center justify-center px-4 mt-20">
                     <div className="w-full max-w-3xl rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-6 md:p-8 shadow-[0_10px_60px_-15px_rgba(0,0,0,0.6)] animate-in fade-in zoom-in-50 duration-500">
                         <div className="flex items-center gap-3 mb-2">
                             <span className="inline-block h-2 w-2 rounded-full bg-red-500 animate-pulse" />
@@ -101,7 +101,7 @@ export default function Home({movies, shows, mood}: {movies: Movie[], shows: TVS
             <section id="mood-results" className="bg-black py-8">
                 <div className="px-4 md:px-10 mb-4 flex items-center justify-between">
                     <h2 className="text-xl md:text-2xl font-semibold">
-                        {mood || query ? 'Your Picks' : 'Popular Right Now'}
+                        {mood || query ? 'Your Picks MOVIES' : 'Popular Right Now'}
                     </h2>
                     {(mood || query) && (
                         <Link
@@ -129,12 +129,19 @@ export default function Home({movies, shows, mood}: {movies: Movie[], shows: TVS
                                         // highlightId === movie.id ? 'scale-105 ring-2 ring-red-500 rounded-2xl' : ''
                                     ].join(' ')}
                                 >
-                                    <MovieCard movie={movie} showNumber={false} />
+                                    <MovieCard movie={movie} showNumber={false}/>
                                 </Link>
                             ))}
                         </div>
                     </div>
                 )}
+
+                <div className="px-4 md:px-10 mb-4 flex items-center justify-between">
+                    <h2 className="text-xl md:text-2xl font-semibold">
+                        {mood || query ? 'Your Picks TV SHOWS' : 'Popular Right Now'}
+                    </h2>
+
+                </div>
 
                 {shows.length === 0 ? (
                     <p className="px-4 md:px-10 text-white/50 animate-in fade-in duration-300">
@@ -152,7 +159,7 @@ export default function Home({movies, shows, mood}: {movies: Movie[], shows: TVS
                                         // highlightId === movie.id ? 'scale-105 ring-2 ring-red-500 rounded-2xl' : ''
                                     ].join(' ')}
                                 >
-                                    <MovieCard movie={movie} showNumber={false} />
+                                    <MovieCard movie={movie} showNumber={false}/>
                                 </Link>
                             ))}
                         </div>

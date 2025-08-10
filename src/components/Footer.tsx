@@ -4,10 +4,10 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-6 pt-6">
                 {/* Company */}
                 <div>
-                    <h4 className="text-white font-medium mb-2">Company</h4>
+                    <h4 className="text-white font-medium mb-2">Project Nexus</h4>
                     <ul className="space-y-1">
-                        <li><a href="#" className="hover:underline">About Us</a></li>
-                        <li><a href="#" className="hover:underline">Careers</a></li>
+                        <li><a href="/home" className="hover:underline">Search</a></li>
+                        <li><a href="/home" className="hover:underline">Home</a></li>
                     </ul>
                 </div>
 
@@ -21,13 +21,13 @@ export default function Footer() {
                 </div>
 
                 {/* Website Language */}
-                <div>
-                    <h4 className="text-white font-medium mb-2">View Website in</h4>
-                    <select className="bg-transparent border border-gray-600 rounded px-2 py-1 text-white">
-                        <option>English</option>
-                        {/* Add more languages if needed */}
-                    </select>
-                </div>
+                {/*<div>*/}
+                {/*    <h4 className="text-white font-medium mb-2">View Website in</h4>*/}
+                {/*    <select className="bg-transparent border border-gray-600 rounded px-2 py-1 text-white">*/}
+                {/*        <option>English</option>*/}
+                {/*        /!* Add more languages if needed *!/*/}
+                {/*    </select>*/}
+                {/*</div>*/}
 
                 {/* Social Media */}
                 <div>
@@ -46,6 +46,8 @@ export default function Footer() {
             <div className="border-t border-gray-700 mt-6 py-4 text-center text-xs text-gray-500 px-6">
                 <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-2">
                     <p>© 2025 Project Nexus. All Rights Reserved.</p>
+
+                    <p> Designed By: Cherinet</p>
                     <div className="space-x-4">
                         <a href="#" className="hover:underline">Terms of Use</a>
                         <a href="#" className="hover:underline">Privacy Policy</a>
