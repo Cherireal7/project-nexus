@@ -1,4 +1,4 @@
-# 🎬 Project Nexus – ProDev Frontend Engineering Capstone
+# 🎬 Project Nexus – Movie Recommendation App
 
 **Project Nexus** is the final milestone in the **ProDev Frontend Engineering** program.  
 It is a real-world, production-grade movie recommendation web app built with **Next.js, TypeScript, TailwindCSS**, and the **TMDB API**.  
